@@ -81,6 +81,9 @@ function collisionDetection() {
                     brick.status = 0;
                     scores++;
                     point.innerHTML = "Scores : " + scores;
+                } else if (scores === (BRICK_ROW * BRICK_COLUMN)) {
+                    alert("YOU WIN");
+                    document.location.reload();
                 }
             }
         }
@@ -145,9 +148,6 @@ function draw() {
     else if (circle_y + move_y > CANVAS.height - CIRCLE_RADIUS) {
         if (circle_y > bar_x && circle_y < bar_x + BAR_WIDTH) {
             move_y = -move_y;
-        } else if (scores === (BRICK_ROW * BRICK_COLUMN)) {
-            alert("YOU WIN");
-            document.location.reload();
         } else {
             alert("GAME OVER");
             document.location.reload();
