@@ -15,7 +15,7 @@ let circle_y = CANVAS.height / 1.2;//toa do y
 let move_x = 2;//di chuyen theo chieu ngang
 let move_y = -2;//di chuyen theo chieu docc
 //bar
-const BAR_WIDTH = 100;//chieu rong
+const BAR_WIDTH = 1000;//chieu rong
 const BAR_HEIGHT = 10;//chieu cao
 let bar_x = CANVAS.width / 2.5;//toa do x
 let bar_y = CANVAS.height / 1.2;//toa do y
@@ -83,12 +83,12 @@ function collisionDetection() {
                     circle_y > brick.y && (circle_y < brick.y + BRICK_HEIGHT)) {
                     move_y = -move_y;
                     brick.status = 0;
+                    scores++;
                     point.innerHTML = "Scores : " + scores;
                     if ((scores) === (BRICK_ROW * BRICK_COLUMN)) {
                         alert("YOU WIN");
                         document.location.reload();
                     }
-                    scores++;
                 }
             }
         }
