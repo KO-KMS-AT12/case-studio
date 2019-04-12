@@ -6,7 +6,7 @@ const BRICK_LEFT = 20;//cach trai
 const BRICK_WIDTH = 20;//chieu rong
 const BRICK_HEIGHT = 10;//chieu cao
 const BRICK_MARGIN = 10;//khoang cach giua brick
-const BRICK_ROW = 15;//so hang
+const BRICK_ROW = 13;//so hang
 const BRICK_COLUMN = 21;//so cot
 //ball
 const CIRCLE_RADIUS = 5;//ban kinh
@@ -15,7 +15,7 @@ let circle_y = CANVAS.height / 1.2;//toa do y
 let move_x = 2;//di chuyen theo chieu ngang
 let move_y = -2;//di chuyen theo chieu docc
 //bar
-const BAR_WIDTH = 1000;//chieu rong
+const BAR_WIDTH = 100;//chieu rong
 const BAR_HEIGHT = 10;//chieu cao
 let bar_x = CANVAS.width / 2.5;//toa do x
 let bar_y = CANVAS.height / 1.2;//toa do y
