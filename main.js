@@ -35,6 +35,10 @@ document.addEventListener("keyup", keyRight);
 let point = document.getElementById("point");
 let scores = 0;
 
+//luot choi
+let life = document.getElementById("life");
+let alive = 3;
+
 
 //lap lai draw();
 let interval = setInterval(draw, 10);
@@ -79,14 +83,13 @@ function collisionDetection() {
                     circle_y > brick.y && (circle_y < brick.y + BRICK_HEIGHT)) {
                     move_y = -move_y;
                     brick.status = 0;
-                    scores++;
                     point.innerHTML = "Scores : " + scores;
                     if ((scores) === (BRICK_ROW * BRICK_COLUMN)) {
                         alert("YOU WIN");
                         document.location.reload();
                     }
+                    scores++;
                 }
-
             }
         }
     }
@@ -151,9 +154,18 @@ function draw() {
         if (circle_y > bar_x && circle_y < bar_x + BAR_WIDTH) {
             move_y = -move_y;
         } else {
-            alert("GAME OVER");
-            document.location.reload();
-            clearInterval(interval);//ngat lap lai
+            alive--;
+            if (alive === 0) {
+                alert("GAME OVER");
+                document.location.reload();
+                clearInterval(interval);//ngat lap lai
+            } else {
+                circle_x = CANVAS.width / 2;
+                circle_y = CANVAS.height / 1.2;
+                move_x = 3;
+                move_y = -3;
+            }
+            life.innerHTML = "Life : " + alive;
         }
     }
     //ball va cham bar
