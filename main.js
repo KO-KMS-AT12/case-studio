@@ -183,7 +183,7 @@ function draw() {
     // di chuyen ball
     circle_x += move_x;
     circle_y += move_y;
-    requestAnimationFrame(draw);
+    window.requestAnimationFrame(draw);
 }
 
 draw();
