@@ -41,7 +41,7 @@ let alive = 3;
 
 
 //lap lai draw();
-let interval = setInterval(draw, 10);
+// let interval = setInterval(draw, 10);
 
 function keyLeft(evt) {
     if (evt.key === "ArrowRight") {
@@ -158,7 +158,7 @@ function draw() {
             if (alive === 0) {
                 alert("GAME OVER");
                 document.location.reload();
-                clearInterval(interval);//ngat lap lai
+                // clearInterval(interval);//ngat lap lai
             } else {
                 circle_x = CANVAS.width / 2;
                 circle_y = CANVAS.height / 1.2;
@@ -173,16 +173,17 @@ function draw() {
         circle_y > bar_y && (circle_y < bar_y + BAR_HEIGHT)) {
         move_y = -move_y;
     }
-
-    // di chuyen ball
-    circle_x += move_x;
-    circle_y += move_y;
-
     // di chuyen bar trong canvas
     if (pressRight && bar_x < CANVAS.width - BAR_WIDTH) {
         bar_x += 7;
     } else if (pressLeft && bar_x > 0) {
         bar_x -= 7;
     }
+
+    // di chuyen ball
+    circle_x += move_x;
+    circle_y += move_y;
+    requestAnimationFrame(draw);
 }
 
+draw();
