@@ -40,7 +40,6 @@ let scores = 0;
 let interval = setInterval(draw, 10);
 
 function keyLeft(evt) {
-    console.log(evt.key);
     if (evt.key === "ArrowRight") {
         pressRight = true;
     } else if (evt.key === "ArrowLeft") {
@@ -89,7 +88,6 @@ function collisionDetection() {
 }
 
 function drawBrick() {
-
     for (let i = 0; i < BRICK_COLUMN; i++) {
         for (let j = 0; j < BRICK_ROW; j++) {
             if (bricks[i][j].status === 1) {
@@ -147,6 +145,9 @@ function draw() {
     else if (circle_y + move_y > CANVAS.height - CIRCLE_RADIUS) {
         if (circle_y > bar_x && circle_y < bar_x + BAR_WIDTH) {
             move_y = -move_y;
+        } else if (scores === (BRICK_ROW * BRICK_COLUMN)) {
+            alert("YOU WIN");
+            document.location.reload();
         } else {
             alert("GAME OVER");
             document.location.reload();
@@ -159,7 +160,7 @@ function draw() {
         move_y = -move_y;
     }
 
-    //di chuyen ball
+    // di chuyen ball
     circle_x += move_x;
     circle_y += move_y;
 
