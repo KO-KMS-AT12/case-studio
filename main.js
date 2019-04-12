@@ -81,10 +81,12 @@ function collisionDetection() {
                     brick.status = 0;
                     scores++;
                     point.innerHTML = "Scores : " + scores;
-                } else if (scores === (BRICK_ROW * BRICK_COLUMN)) {
-                    alert("YOU WIN");
-                    document.location.reload();
+                    if ((scores) === (BRICK_ROW * BRICK_COLUMN)) {
+                        alert("YOU WIN");
+                        document.location.reload();
+                    }
                 }
+
             }
         }
     }
@@ -154,7 +156,7 @@ function draw() {
             clearInterval(interval);//ngat lap lai
         }
     }
-    //va cham bar
+    //ball va cham bar
     if (circle_x > bar_x && (circle_x < bar_x + BAR_WIDTH) &&
         circle_y > bar_y && (circle_y < bar_y + BAR_HEIGHT)) {
         move_y = -move_y;
