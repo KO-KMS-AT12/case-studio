@@ -6,14 +6,14 @@ const BRICK_LEFT = 20;//cach trai
 const BRICK_WIDTH = 20;//chieu rong
 const BRICK_HEIGHT = 10;//chieu cao
 const BRICK_MARGIN = 10;//khoang cach giua brick
-const BRICK_ROW = 1;//so hang
-const BRICK_COLUMN = 1;//so cot
+const BRICK_ROW = 7;//so hang
+const BRICK_COLUMN = 21;//so cot
 //ball
 const CIRCLE_RADIUS = 5;//ban kinh
 let circle_x = CANVAS.width / 2;//toa do x
 let circle_y = CANVAS.height / 1.2;//toa do y
-let move_x = 2;//di chuyen theo chieu ngang
-let move_y = -2;//di chuyen theo chieu docc
+let move_x = 3;//di chuyen theo chieu ngang
+let move_y = -3;//di chuyen theo chieu docc
 //bar
 const BAR_WIDTH = 100;//chieu rong
 const BAR_HEIGHT = 10;//chieu cao
@@ -25,7 +25,6 @@ let pressLeft = false;
 
 //mang khoi gach
 const bricks = buildBrick();
-console.log(bricks);
 
 //lang nghe su kien nhan trai phai
 document.addEventListener("keydown", keyLeft);
@@ -43,7 +42,9 @@ let alive = 3;
 let isCheckPress = false;
 
 //lap lai draw();
-// let interval = setInterval(draw, 10);
+// let interval = setInterval(draw, 5);
+// clearInterval(interval);//ngat lap lai
+
 
 function keyLeft(evt) {
     if (evt.key === "ArrowRight") {
@@ -65,7 +66,7 @@ function buildBrick() {
     let bricks = [];
     for (let i = 0; i < BRICK_COLUMN; i++) {
         bricks[i] = [];
-        for (var j = 0; j < BRICK_ROW; j++) {
+        for (let j = 0; j < BRICK_ROW; j++) {
             bricks[i][j] = {
                 x: 0,
                 y: 0,
@@ -141,7 +142,7 @@ function draw() {
     drawBar();
     collisionDetection();
     ready();
-
+    window.requestAnimationFrame(draw);
 
     //chan ball chi di chuyen trong canvas
     if (circle_x + move_x > CANVAS.width - CIRCLE_RADIUS ||
@@ -149,12 +150,13 @@ function draw() {
 
         move_x = -move_x;
 
-    } else if (circle_y + move_y < CIRCLE_RADIUS) {
+    }
+    if (circle_y + move_y < CIRCLE_RADIUS) {
         move_y = -move_y;
     }
 
     //check ball cham day
-    else if (circle_y + move_y > CANVAS.height - CIRCLE_RADIUS) {
+    if (circle_y + move_y > CANVAS.height - CIRCLE_RADIUS) {
         if (circle_y > bar_x && circle_y < bar_x + BAR_WIDTH) {
             move_y = -move_y;
         } else {
@@ -162,15 +164,20 @@ function draw() {
             if (alive === 0) {
                 alert("GAME OVER");
                 document.location.reload();
-                // clearInterval(interval);//ngat lap lai
             } else {
+                if (alive === 2) {
+                    move_x = 5;
+                    move_y = -5;
+                } else if (alive === 1) {
+                    move_x = 8;
+                    move_y = 8;
+                }
                 isCheckPress = false;
                 bar_x = CANVAS.width / 2.35;
                 bar_y = CANVAS.height / 1.2;
                 circle_x = CANVAS.width / 2;
                 circle_y = CANVAS.height / 1.2;
-                move_x = 3;
-                move_y = -3;
+
             }
             life.innerHTML = "Life : " + alive;
         }
@@ -182,24 +189,17 @@ function draw() {
     }
     // di chuyen bar trong canvas
     if (pressRight && bar_x < CANVAS.width - BAR_WIDTH) {
-        bar_x += 7;
+        bar_x += 3;
     } else if (pressLeft && bar_x > 0) {
-        bar_x -= 7;
+        bar_x -= 3;
     }
 
+    // di chuyen ball
     if (isCheckPress) {
         circle_x += move_x;
         circle_y += move_y;
     }
-    // di chuyen ball
 
-    window.requestAnimationFrame(draw);
-}
-
-function start() {
-    let btnStart = document.getElementById("btn_start");
-    btnStart.style.visibility = "hidden";
-    draw();
 }
 
 function eventPress(event) {
@@ -217,3 +217,8 @@ function ready() {
     window.addEventListener("keydown", eventPress);
 }
 
+function start() {
+    let btnStart = document.getElementById("btn_start");
+    btnStart.style.visibility = "hidden";
+    draw();
+}
